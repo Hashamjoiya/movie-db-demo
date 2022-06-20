@@ -30,3 +30,13 @@ export function getMoviesBySearch(options: QueryOptions) {
     })
         .then(response => response.json())
 }
+
+export function getMovieDetails(id: number) {
+    let url = basePath + `${id}?` + apiParam
+    return fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+}

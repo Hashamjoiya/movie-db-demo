@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { fetchMovies } from "../features/movies/movieSlice";
-import styles from './SearchField.module.scss'
+import './SearchField.scss'
 
 export function SearchField() {
     const [searchEnabled, toggleSearch] = useState(false)
