@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { QueryOptions } from "../../models/api";
-import { getTopRatedMovies } from "./moviesAPI";
+import { getMoviesBySearch, getTopRatedMovies } from "./moviesAPI";
 
 export interface MoviesState {
     value: {
@@ -26,7 +26,10 @@ const initialState: MoviesState = {
 export const fetchMovies = createAsyncThunk(
     'movies/fetchMovies',
     async (options: QueryOptions) => {
-        return getTopRatedMovies(options)
+        if (!options.searchParam || options.searchParam === '')
+            return getTopRatedMovies(options)
+        //fetch by search
+        return getMoviesBySearch(options)
     }
 )
 

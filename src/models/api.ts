@@ -1,4 +1,5 @@
 export interface QueryOptions {
     page?: number,
-    region?: string
+    region?: string,
+    searchParam?: string
 }
