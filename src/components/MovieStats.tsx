@@ -27,7 +27,12 @@ export function MovieStats() {
             {topTenMovies?.length < 1 && <h1>Nothing to Show</h1>}
             {topTenMovies?.length > 0 &&
                 <div>
-                    <BarChart data={parsedData(topTenMovies)} />
+                    <div>
+                        <BarChart data={parsedData(topTenMovies)} />
+                    </div>
+                    <div>
+                        <BarChart data={parsedData(topTenMovies)} showVotes />
+                    </div>
                 </div>
             }
         </div>

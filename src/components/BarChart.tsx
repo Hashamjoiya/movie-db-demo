@@ -15,11 +15,15 @@ const data = [
     { country: 'Israel', value: 1263 }
 ]
 
-export function BarChart(props: { data: any }) {
+export function BarChart(props: { data: any, showVotes?: boolean }) {
     let svg: d3.Selection<SVGGElement, unknown, HTMLElement, any>
 
+    const getMaXLabel = (data: any[]) => {
+        return Math.floor((Math.max(...props.data.map((e: { votes: number }) => e.votes))) * 1.1)
+    }
+
     useEffect(() => {
-        if (!svg) {
+        if (!svg && props.data) {
             // set the dimensions and margins of the graph
             const margin = { top: 30, right: 30, bottom: 70, left: 60 },
                 width = 390 - margin.left - margin.right,
@@ -49,7 +53,7 @@ export function BarChart(props: { data: any }) {
 
             // Add Y axis
             const y = d3.scaleLinear()
-                .domain([0, 10])
+                .domain([0, props.showVotes ? getMaXLabel(props.data) : 10])
                 .range([height, 0]);
             svg.append("g")
                 .call(d3.axisLeft(y));
@@ -60,9 +64,9 @@ export function BarChart(props: { data: any }) {
                 .enter()
                 .append("rect")
                 .attr("x", (function (d: any) { return x(d.title); } as any))
-                .attr("y", function (d: any) { return y(d.rating); })
+                .attr("y", function (d: any) { return y(props.showVotes ? d.votes : d.rating); })
                 .attr("width", x.bandwidth())
-                .attr("height", function (d: any) { return height - y(d.rating); })
+                .attr("height", function (d: any) { return height - y(props.showVotes ? d.votes : d.rating); })
                 .attr("fill", "#69b3a2");
         }
     }, [])
