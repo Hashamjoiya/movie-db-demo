@@ -8,6 +8,7 @@ import './index.scss';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MovieDetails } from './components/MovieDetails';
 import { Movies } from './features/movies/Movies';
+import { MovieStats } from './components/MovieStats';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -20,6 +21,7 @@ root.render(
           <Route path="/" element={<App />}>
             <Route path="/" element={<Movies />} />
             <Route path=":movie/details" element={<MovieDetails />} />
+            <Route path="stats" element={<MovieStats />} />
           </Route>
         </Routes>
       </BrowserRouter>
